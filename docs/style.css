@@ -1,0 +1,188 @@
+/* Fondo */
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0a0a0f 0%, #000 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+#message {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: #ffeb3b;
+  text-shadow: 0 0 10px #fdd835, 0 0 20px #fbc02d;
+  text-align: center;
+}
+
+/* Jardín */
+#garden {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 50px;
+  z-index: 2;
+  position: relative;
+}
+
+/* Flor */
+.flower {
+  transform: scale(1.3);
+  position: relative;
+  width: 120px;
+  height: 230px; /* más espacio para el tallo */
+  animation: grow 2.5s ease-out;
+  transform-origin: bottom center;
+}
+
+@keyframes grow {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Pétalos */
+.petal {
+  position: absolute;
+  width: 55px;   /* más pequeños */
+  height: 80px;
+  background: radial-gradient(circle at top left, #ffeb3b, #fbc02d);
+  border-radius: 50% 50% 50% 50%;
+  top: -35px; /* subidos */
+  left: 32px;
+  transform-origin: center bottom;
+  z-index: 0;
+}
+
+/* 8 pétalos distribuidos */
+.petal:nth-child(1) { transform: rotate(0deg) translateY(-30px); }
+.petal:nth-child(2) { transform: rotate(45deg) translateY(-30px); }
+.petal:nth-child(3) { transform: rotate(90deg) translateY(-30px); }
+.petal:nth-child(4) { transform: rotate(135deg) translateY(-30px); }
+.petal:nth-child(5) { transform: rotate(180deg) translateY(-30px); }
+.petal:nth-child(6) { transform: rotate(225deg) translateY(-30px); }
+.petal:nth-child(7) { transform: rotate(270deg) translateY(-30px); }
+.petal:nth-child(8) { transform: rotate(315deg) translateY(-30px); }
+
+/* Centro */
+.center {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: radial-gradient(circle, #ff9800, #e65100);
+  border-radius: 50%;
+  top: 10px; /* bajado para no tapar tallo */
+  left: 25px;
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.8);
+}
+
+/* Tallo */
+.stem {
+  position: absolute;
+  width: 14px; /* más grueso */
+  height: 160px; /* más largo */
+  background: linear-gradient(to bottom, #2e7d32, #1b5e20);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  z-index: -1; /* detrás de la flor */
+}
+
+/* Hojas */
+.leaf {
+  position: absolute;
+  width: 50px;
+  height: 30px;
+  background: linear-gradient(to right, #388e3c, #2e7d32);
+  border-radius: 50% 50% 0 50%;
+  bottom: 40px;
+  z-index: -1; /* también detrás */
+}
+
+.leaf-left { left: -45px; transform: rotate(-30deg); }
+.leaf-right { right: -45px; transform: rotate(30deg) scaleX(-1); }
+
+/* Estrellas estáticas */
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: blink var(--tw, 3s) infinite alternate;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes blink {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+/* Estrellas fugaces */
+.shooting-star {
+  position: absolute;
+  width: var(--len, 120px);
+  height: 2px;
+  background: linear-gradient(90deg, white, transparent);
+  transform: rotate(var(--angle, 0deg));
+  filter: drop-shadow(0 0 6px white);
+}
+
+@keyframes shoot {
+  from { transform: translate(0, 0) rotate(var(--angle, 0deg)); opacity: 1; }
+  to   { transform: translate(var(--dx), var(--dy)) rotate(var(--angle, 0deg)); opacity: 0; }
+}
+
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #fdd835, #fbc02d);
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(255, 235, 59, 0.8);
+  z-index: 999;
+}
+/* -------------------------
+   Responsive Ajustes Extra
+--------------------------*/
+
+@media (max-width: 600px) {
+  /* Subir un poco la flor */
+  #garden {
+    margin-bottom: 80px; /* más espacio abajo */
+  }
+
+  /* Subir el botón */
+  #musicBtn {
+    bottom: 60px; /* más arriba que antes */
+    font-size: 1rem; /* botón más compacto */
+    padding: 10px 20px;
+  }
+
+  /* Mensaje más pequeño y ajustado */
+  #message {
+    font-size: 1.4rem; /* antes era 2rem */
+    padding: 0 15px;   /* margen lateral para que no choque con el borde */
+    line-height: 1.4;  /* mejor lectura */
+  }
+}
+
